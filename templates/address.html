@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Address {% endblock %}
+
+{% block content %}
+
+{% include 'message.html' %}
+
+<section class="adadd">
+    <form action="{% url 'address' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="mob" placeholder="Enter Contact No." required>
+        <input type="text" name="house" placeholder="Enter House No." required>
+        <input type="text" name="street" placeholder="Enter Street Name." required>
+        <input type="text" name="area" placeholder="Enter Area Name." required>
+        <input type="text" name="city" placeholder="Enter City Name" required>
+        <input type="text" name="pin" placeholder="Enter Pincode" required>
+        <button type="submit">Add Address</button>
+    </form>
+</section>
+
+{% endblock %}

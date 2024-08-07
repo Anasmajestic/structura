@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{cat}} {% endblock %}
+
+{% block content %}
+
+<section class="propage">
+    <h1>{{cat}} Products</h1>
+    <div class="probox">
+        {% for prodt in product %}
+        <div class="catbox1">
+            <div class="proimg">
+                {% if prodt.trending %}
+                    <p>Trending</p>
+                {% endif %}
+                <img src="{{prodt.product_image.url}}" alt="">
+            </div>
+            <a href="{% url 'product_details' cat prodt.id %}" class="catens">
+                <p>{{prodt.name | truncatechars:30}}</p>
+                <p>&#8377 {{prodt.selling_price}}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

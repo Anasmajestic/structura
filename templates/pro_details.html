@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{details.0.name}} {% endblock %}
+
+{% block content %}
+
+<section class="pdsec">
+    <div class="pdbox">
+        {% for det in details %}
+            <div class="detail_img">
+                {% if det.trending %}
+                    <p>Trending</p>
+                {% endif %}
+                <img src="{{det.product_image.url}}" alt="">
+            </div>
+
+            <div class="detail_box">
+                <h1>{{det.name}}</h1>
+                <p>Price: &#8377 {{det.selling_price}}</p>
+                <p>Description</p>
+                <p>{{det.description}}</p>
+
+                <form action="{% url 'addCart' %}" method="post">
+                    {% csrf_token %}
+                
+                    <input type="hidden" value="{{det.id}}" name="pro_id">
+                    <input type="hidden" value="1" name="pro_qty">
+                    <button type="submit" class="addbtn">Add To Cart</button>
+                </form>
+            </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} 404 {% endblock %}
+
+{% block content %}
+
+
+<section class="p404">
+    <h1>404 Page Not Found</h1>
+    <a href="{% url 'home' %}"><button type="button">Go to Home</button></a>
+</section>
+
+
+
+{% endblock %}

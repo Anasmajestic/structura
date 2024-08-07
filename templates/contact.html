@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Get Support {% endblock %}
+
+{% block content %}
+
+{% include 'message.html' %}
+
+<section class="support">
+    <h1>Get Quick Support</h1>
+    <form action="{% url 'contact' %}" method="post">{% csrf_token %}
+        <input type="text" name="name" placeholder="Enter Your Name" required>
+        <input type="email" name="email" placeholder="Enter Your E-Mail" required>
+        <input type="text" name="mobile" placeholder="Enter Your Mobile" required>
+        <select name="time" aria-placeholder="Call Request Time">
+            <option value="Immediately">Immediate</option>
+            <option value="After 5 minitues">After 5 minitues</option>
+            <option value="After 15 minitues">After 15 minitues</option>
+            <option value="After 30 minitues">After 30 minitues</option>
+            <option value="After 60 minitues">After 60 minitues</option>
+        </select>
+        <button>Get Call Request</button>
+    </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+{% include 'message.html' %}
+<section class="cartsec">
+
+    {% if datas %}
+    <div class="tablesec">
+        <table class="tables">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Cost</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                <tr>
+                    <td>{{data.product.name}}</td>
+                    <td><img src="{{data.product.product_image.url}}" alt=""></td>
+                    <td>&#8377 {{data.product.selling_price}}</td>
+                    <td>{{data.products_qty}}</td>
+                    <td id="price">&#8377 {{data.total_price}}</td>
+                    <td><a href="{% url 'cart_remove' data.id %}"><button type="submit">Remove</button></a></td>
+                </tr>
+                {% endfor %}
+                <tr class="last">
+                    <td colspan="6">Total Oder Price: <span>&#8377 {{sum}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cartsecmob">
+        {% for data in datas %}
+            <div class="cartbox">
+                <p>{{data.product.name}}</p>
+                <img src="{{data.product.product_image.url}}" alt="">
+                <p>&#8377 {{data.product.selling_price}}</p>
+                <p>Quantity: {{data.products_qty}}</p>
+                <div class="cartinbox">
+                    <p id="price">Total: &#8377 {{data.total_price}}</p>
+                    <a href="{% url 'cart_remove' data.id %}"><button type="submit">Remove</button></a>
+                </div>
+            </div>
+        {% endfor %}                
+        <p>Total Oder Price: <span>&#8377 {{sum}}</span></p>
+    </div>
+    
+
+    <div class="addresec">
+        <div class="addset">
+            {% if adds %}
+            <form action="{% url 'success' %}" method="post">{% csrf_token %}
+
+                <input type="hidden" id="name" value="{{request.user.first_name}}" name="name" required>
+                <input type="hidden"  id="amt" value="{{sum}}" name="amt" required>
+
+
+                {% for add in adds %}
+                    <div class="addbox">
+                        <label for="">+91 {{add.mobile}}, <br> {{add.house_no}}, <br> {{add.street}}, <br> {{add.area}}, <br> {{add.city}}, <br> {{add.pincode}}</label>
+                        <input type="radio" id="1" value="{{add.id}}" name="adds" required>
+                    </div>
+                {% endfor %}
+                
+
+                {% for cart in datas %}
+                    <input type="hidden" value="{{cart.id}}" name="cart" required>
+                {% endfor %}       
+
+                <button type="submit">Order Now</button>
+            </form>
+            <a href="{% url 'address' %}"><button>Give Address</button></a>
+            {% else %}
+                <a href="{% url 'address' %}"><button>Give Address</button></a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% else %}
+        <div class="emt">
+            <h1>Empty Cart</h1>
+            <a href="{% url 'category' %}"><button>Go Shop</button></a>
+        </div>
+    {% endif %}
+
+
+</section>
+{% endblock %}

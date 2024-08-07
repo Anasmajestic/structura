@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Category Page {% endblock %}
+
+{% block content %}
+
+<section class="catpage">
+    <h1>Choose Your Category</h1>
+    <div class="catbox">
+        {% for cat in category %}
+        <div class="catbox1">
+            <div class="catimg">
+                <img src="{{cat.image.url}}" alt="">
+            </div>
+            <a href="{% url 'product' cat.name %}" class="caten">
+                <p>{{cat.name}}</p>
+                <p>{{cat.description}} </p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

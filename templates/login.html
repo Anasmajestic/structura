@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+{% include 'message.html' %}
+
+
+<section class="regform">
+    <div class="form-container logs">
+        <p>Login Here</p>
+        <form action="" method="post" class="register">
+            {% csrf_token %}
+            <div class="form-control">
+                <label for="mail">Email</label>
+                <input type="email" name="email" id="mail" placeholder="Enter Your E-mail ID" required>
+            </div>
+            <div class="form-control">
+                <label for="pwd">Password</label>
+                <input type="password" name="pwd" id="pwd" placeholder="Enter Your Password" required>
+            </div>
+            <button type="submit" class="logbtn">Login</button>
+        </form>
+        <p class="all">Create <a href="" class="newu">New user</a>?</p>
+    </div>
+</section>
+
+
+{% endblock %}
