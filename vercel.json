@@ -5,7 +5,7 @@
         "config":{"maxLambdasize":"15mb", "runtime":"python3.12"}
     }],
     "routes":[{
-        "src":"/.(.*)",
+        "src":"/(.*)",
         "dest":"structura/wsgi.py"
     }]
 }
